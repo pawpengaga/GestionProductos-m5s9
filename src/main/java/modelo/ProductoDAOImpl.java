@@ -107,9 +107,35 @@ public class ProductoDAOImpl implements IProductoDAO {
   }
 
   @Override
-  public void updateProduct(Producto p) {
+    public void updateProduct(Producto p) {
+    String query = "UPDATE productos SET nombre = ?, precio = ? WHERE id = ?";
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    try {
+        conn = ConexionDB.getConnect();
+        stmt = conn.prepareStatement(query);
+        stmt.setString(1, p.getNombre());
+        stmt.setDouble(2, p.getPrecio());
+        stmt.setInt(3, p.getIdProducto());
+        
+        int fila = stmt.executeUpdate();
+        if (fila > 0) {
+            System.out.println("Producto actualizado con éxito");
+        } else {
+            System.out.println("No se encontró el producto a actualizar");
+        }
+    } catch (SQLException e) {
+        e.printStackTrace();
+    } finally {
+        try {
+            if (stmt != null) stmt.close();
+            if (conn != null) conn.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+}
 
-  }
 
   @Override
   public void eliminarProduct(int id) {
