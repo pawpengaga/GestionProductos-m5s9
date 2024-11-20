@@ -126,20 +126,38 @@ public class ProductoDAOImpl implements IProductoDAO {
         }
     } catch (SQLException e) {
         e.printStackTrace();
-    } finally {
-        try {
-            if (stmt != null) stmt.close();
-            if (conn != null) conn.close();
-        } catch (SQLException e) {
-            e.printStackTrace();
-        }
     }
 }
 
 
   @Override
   public void eliminarProduct(int id) {
+    String query = "DELETE FROM roles WHERE idRol = ?";
 
+    Connection conn = null;
+    PreparedStatement stmt = null;
+    
+    try {
+      conn = ConexionDB.getConnect();
+      stmt = conn.prepareStatement(query);
+      stmt.setInt(1, id);
+
+      int fila = stmt.executeUpdate(); // Ejecutar la consulta
+      if (fila > 0) {
+          System.out.println("Producto eliminado");
+      } else {
+          System.out.println("Problema al eliminar el producto");
+      }
+  } catch (SQLException e) {
+      e.printStackTrace();
+  } finally {
+      try {
+          if (stmt != null) stmt.close(); // Cerrar el PreparedStatement
+          if (conn != null) conn.close(); // Cerrar la conexión
+      } catch (SQLException e) {
+          e.printStackTrace();
+      }
+  }
   }
 
 }
