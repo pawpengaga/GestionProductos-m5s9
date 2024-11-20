@@ -124,6 +124,7 @@ public class ProductoDAOImpl implements IProductoDAO {
         } else {
             System.out.println("No se encontró el producto a actualizar");
         }
+        stmt.close();
     } catch (SQLException e) {
         e.printStackTrace();
     }
@@ -132,32 +133,32 @@ public class ProductoDAOImpl implements IProductoDAO {
 
   @Override
   public void eliminarProduct(int id) {
-    String query = "DELETE FROM roles WHERE idRol = ?";
-
+    
+    String query = "DELETE FROM productos WHERE id = ?";
     Connection conn = null;
     PreparedStatement stmt = null;
-    
+
     try {
       conn = ConexionDB.getConnect();
       stmt = conn.prepareStatement(query);
+
+      // Con el id que trajimos de los params, completamos la SQLQUERY
       stmt.setInt(1, id);
 
-      int fila = stmt.executeUpdate(); // Ejecutar la consulta
+      // Evaluamos el total de lineas afectadas al mismo tiempo que ejectuamos la consulta
+      int fila = stmt.executeUpdate();
+
       if (fila > 0) {
-          System.out.println("Producto eliminado");
+        System.out.println("Producto eliminado...");
       } else {
-          System.out.println("Problema al eliminar el producto");
+        System.out.println("Hubo un problema al eliminar el producto...");
       }
-  } catch (SQLException e) {
+      // Se cierra el statement
+      stmt.close();
+    } catch (SQLException e) {
       e.printStackTrace();
-  } finally {
-      try {
-          if (stmt != null) stmt.close(); // Cerrar el PreparedStatement
-          if (conn != null) conn.close(); // Cerrar la conexión
-      } catch (SQLException e) {
-          e.printStackTrace();
-      }
-  }
+    }
+  
   }
 
 }
