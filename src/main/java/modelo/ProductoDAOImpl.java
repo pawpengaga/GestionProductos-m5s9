@@ -76,8 +76,33 @@ public class ProductoDAOImpl implements IProductoDAO {
   }
 
   @Override
-  public Producto getProducto(int id) {
-    return null;
+  public Producto getProducto(int id) throws SQLException {
+    String sql = "SELECT * FROM productos WHERE id = " + id;
+
+    // Producto usando el constructor vacio
+    Producto p = new Producto();
+
+    Connection cnx = ConexionDB.getConnect();
+    Statement stmt = cnx.createStatement();
+
+    try {
+      ResultSet rs = stmt.executeQuery(sql);
+      while (rs.next()) {
+        // El objeto vacio se llena manualmente a traves de los setters
+        p.setIdProducto(rs.getInt("id"));
+        p.setNombre(rs.getString("nombre"));
+        p.setPrecio(rs.getDouble("precio"));
+      }
+      // Cerramos el resultset
+      rs.close();
+      stmt.close();
+
+    } catch (SQLException e) {
+      e.printStackTrace();
+    }
+
+    // Retornamos la lista Java una vez llenada
+    return p;
 
   }
 
