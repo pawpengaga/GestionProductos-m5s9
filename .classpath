@@ -2,6 +2,7 @@
 <classpath>
 	<classpathentry kind="con" path="org.eclipse.jdt.launching.JRE_CONTAINER/org.eclipse.jdt.internal.debug.ui.launcher.StandardVMType/JavaSE-23"/>
 	<classpathentry kind="src" path="src/main/java"/>
+	<classpathentry kind="lib" path="c:/Users/Erick Rivera/Desktop/java-traini/MODULO 5/session 3/GestorUsuarios/src/main/webapp/WEB-INF/lib/postgresql-42.7.4.jar"/>
 	<classpathentry kind="lib" path="c:/apache-tomcat/lib/annotations-api.jar"/>
 	<classpathentry kind="lib" path="c:/apache-tomcat/lib/catalina.jar"/>
 	<classpathentry kind="lib" path="c:/apache-tomcat/lib/catalina-ant.jar"/>
