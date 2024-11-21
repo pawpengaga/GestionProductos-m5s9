@@ -33,33 +33,30 @@ public class ProductoServlet extends HttpServlet {
 		// Si vamos a tener accion
 
 		String accion = request.getParameter("accion");
-
+		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
 		try {
-			if (accion.equals("add")) {
+			if ("add".equals(accion)) {
 				// Redirige al creador de productos
 				RequestDispatcher dispatcher = request.getRequestDispatcher("addProductos.jsp");
 				dispatcher.forward(request, response);
-			} else if (accion.equals("edita")) {
+			} else if ("edita".equals(accion)) {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("editProductos.jsp");
 				dispatcher.forward(request, response);
-			} else if (accion.equals("elimina")) {
+			} else if ("elimina".equals(accion)) {
 				// Porsiacaso...
 			} else if (accion == null) {
+				System.out.println("Se entro por aqui");
 				// Sin ninguna accion, solo vemos los productos
-				try {
-					// Primero le pasamos los productos como atributo
-					List<Producto> productos = implDAO.getAllProducts();
-					request.setAttribute("productos", productos);
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-		
+				// Primero le pasamos los productos como atributo
+				List<Producto> productos = implDAO.getAllProducts();
+				request.setAttribute("productos", productos);
 				// Una vez pasados los productos vamos directamente el index de productos
 				RequestDispatcher dispatcher = request.getRequestDispatcher("productos.jsp");
 				dispatcher.forward(request, response);
+		
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			System.out.println("Hubo un error... " + e.getMessage());
 		}
 
 	}

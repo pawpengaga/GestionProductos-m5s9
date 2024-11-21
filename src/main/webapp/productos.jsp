@@ -9,10 +9,11 @@
 <body>
     
     <h2>Listado de productos</h2>
+    <p>Parrafo añadido posteriormente...</p>
     <br>
-    <button><a href="/GestionProductos/productos?accion=add">Agregar productos</a></button>
+    <a href="/GestionProductos/productos?accion=add"><button>Agregar productos</button></a>
     <br>
-    <button><a href="/GestionProductos/productos">Regresar</a></button>
+    <a href="/GestionProductos">Regresar</a>
     <br>
     <c:if test="${empty productos}">
         <p>No hay productos registrados...</p>
@@ -30,7 +31,7 @@
 
                 <c:forEach var="prod" items="${productos}">
                     <tr>
-                        <td>${prod.id}</td>
+                        <td>${prod.idProducto}</td>
                         <td>${prod.nombre}</td>
                         <td>${prod.precio}</td>
                     </tr>
