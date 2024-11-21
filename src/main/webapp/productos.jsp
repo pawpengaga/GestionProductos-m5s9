@@ -12,6 +12,12 @@
     <br>
     <button><a href="/GestionProductos/productos?accion=add">Agregar productos</a></button>
     <br>
+    <button><a href="/GestionProductos/productos">Regresar</a></button>
+    <br>
+    <c:if test="${empty productos}">
+        <p>No hay productos registrados...</p>
+    </c:if>
+    <c:if test="${not empty productos}">
     <table border="1">
         <thead>
             <tr>
@@ -21,15 +27,17 @@
             </tr>
         </thead>
         <tbody>
-            <c:forEach var="prod" items="${productos}">
-                <tr>
-                    <td>${prod.id}</td>
-                    <td>${prod.nombre}</td>
-                    <td>${prod.precio}</td>
-                </tr>
-            </c:forEach>
-        </tbody>
-    </table>
 
+                <c:forEach var="prod" items="${productos}">
+                    <tr>
+                        <td>${prod.id}</td>
+                        <td>${prod.nombre}</td>
+                        <td>${prod.precio}</td>
+                    </tr>
+				</c:forEach>
+            </tbody>
+        </table>
+    </c:if>
+        
 </body>
 </html>

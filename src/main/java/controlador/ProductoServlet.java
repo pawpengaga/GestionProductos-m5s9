@@ -22,7 +22,7 @@ public class ProductoServlet extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	// Nos traemos la implementacion del DAO
-	private ProductoDAOImpl implDAO;
+	private ProductoDAOImpl implDAO = new ProductoDAOImpl();
 
 	public ProductoServlet() {
 			super();
@@ -44,7 +44,7 @@ public class ProductoServlet extends HttpServlet {
 				dispatcher.forward(request, response);
 			} else if (accion.equals("elimina")) {
 				// Porsiacaso...
-			} else {
+			} else if (accion == null) {
 				// Sin ninguna accion, solo vemos los productos
 				try {
 					// Primero le pasamos los productos como atributo
