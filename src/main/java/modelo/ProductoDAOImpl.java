@@ -82,7 +82,7 @@ public class ProductoDAOImpl implements IProductoDAO {
     // Producto usando el constructor vacio
     Producto p = new Producto();
 
-    Connection cnx = ConexionDB.getConnect();
+    Connection cnx = PoolConexiones.getDataSource().getConnection();
     Statement stmt = cnx.createStatement();
 
     try {
@@ -112,7 +112,7 @@ public class ProductoDAOImpl implements IProductoDAO {
     Connection conn = null;
     PreparedStatement stmt = null;
     try {
-        conn = ConexionDB.getConnect();
+        conn = PoolConexiones.getDataSource().getConnection();
         stmt = conn.prepareStatement(query);
         stmt.setString(1, p.getNombre());
         stmt.setDouble(2, p.getPrecio());
@@ -139,7 +139,7 @@ public class ProductoDAOImpl implements IProductoDAO {
     PreparedStatement stmt = null;
 
     try {
-      conn = ConexionDB.getConnect();
+      conn = PoolConexiones.getDataSource().getConnection();
       stmt = conn.prepareStatement(query);
 
       // Con el id que trajimos de los params, completamos la SQLQUERY
