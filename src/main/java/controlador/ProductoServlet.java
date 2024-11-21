@@ -40,7 +40,7 @@ public class ProductoServlet extends HttpServlet {
 				RequestDispatcher dispatcher = request.getRequestDispatcher("addProductos.jsp");
 				dispatcher.forward(request, response);
 			} else if (accion.equals("edita")) {
-				RequestDispatcher dispatcher = request.getRequestDispatcher("addProductos.jsp");
+				RequestDispatcher dispatcher = request.getRequestDispatcher("editProductos.jsp");
 				dispatcher.forward(request, response);
 			} else if (accion.equals("elimina")) {
 				// Porsiacaso...
