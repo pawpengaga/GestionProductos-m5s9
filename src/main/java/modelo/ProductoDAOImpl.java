@@ -21,9 +21,9 @@ public class ProductoDAOImpl implements IProductoDAO {
 
     // Trabajar con base de datos simple implica try-catch
     try {
-       // Primero creamos la conexion
-       // La conexion puede llamarse cnx o conn
-      Connection cnx = ConexionDB.getConnect();
+      // Primero creamos la conexion
+      // Nos conseguimos una conexion del pool de conexiones (El datasource, hay que pensarlo como un arreglo de conexiones)
+      Connection cnx = PoolConexiones.getDataSource().getConnection();
   
       // El PreparedStatement se usa para consultas complejas NO SELECT
       // Esto habilita, PREPARA la query para que reciba los datos dinamicos y este completa
@@ -52,7 +52,7 @@ public class ProductoDAOImpl implements IProductoDAO {
     String sql = "SELECT * FROM productos";
 
     // Nos conectamos y creamos el statement simple
-    Connection cnx = ConexionDB.getConnect();
+    Connection cnx = PoolConexiones.getDataSource().getConnection();
     Statement stmt = cnx.createStatement();
 
     try {

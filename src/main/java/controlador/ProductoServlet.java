@@ -10,7 +10,6 @@ import modelo.Producto;
 import modelo.ProductoDAOImpl;
 
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
@@ -30,10 +29,10 @@ public class ProductoServlet extends HttpServlet {
 	}
 
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		
 		// Si vamos a tener accion
-
 		String accion = request.getParameter("accion");
-		System.out.println("aaaaaaaaaaaaaaaaaaaaaaaaaaa");
+
 		try {
 			if ("add".equals(accion)) {
 				// Redirige al creador de productos
@@ -93,7 +92,7 @@ public class ProductoServlet extends HttpServlet {
 	
 			}
 		} catch (Exception e) {
-			// TODO: handle exception
+			e.printStackTrace();
 		}
 
 	}
