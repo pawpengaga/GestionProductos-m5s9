@@ -44,6 +44,8 @@ public class ProductoServlet extends HttpServlet {
 
 				int id = Integer.parseInt(request.getParameter("id"));
 				request.setAttribute("id", id);
+				Producto p = implDAO.getProducto(id);
+				request.setAttribute("producto", p);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("editProductos.jsp");
 				dispatcher.forward(request, response);
 
@@ -53,7 +55,7 @@ public class ProductoServlet extends HttpServlet {
 				implDAO.eliminarProduct(id);
 				response.sendRedirect("/GestionProductos/productos");
 
-			} else if (accion == null) {
+			} else if (accion == null || "listar".equals(accion)) {
 
 				System.out.println("Se entro por aqui");
 				// Sin ninguna accion, solo vemos los productos
@@ -86,11 +88,11 @@ public class ProductoServlet extends HttpServlet {
 				response.sendRedirect("/GestionProductos/productos");
 				
 			} else if (accion.equals("editar")) {
-
+				int id = Integer.parseInt(request.getParameter("id"));
 				String nombre = request.getParameter("nombre");
 				double precio = Double.parseDouble(request.getParameter("precio"));
-				implDAO.updateProduct(new Producto(0, nombre, precio));
-
+				implDAO.updateProduct(new Producto(id, nombre, precio));
+				System.out.println("Vamos a revisar la edicion");
 				// Una vez creado el producto se vuelve a redireccionar al GET del servlet
 				response.sendRedirect("/GestionProductos/productos");
 	
