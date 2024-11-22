@@ -43,10 +43,10 @@
                         <td>
                             <div style="display: flex; flex-direction: row; gap: 5px;">
                                 <div style="padding: 5px;">
-                                    <a href="/GestionProductos/productos?accion=editar&id=${status.index}"><button>Editar</button></a>
+                                    <a href="/GestionProductos/productos?accion=editar&id=${prod.idProducto}"><button>Editar</button></a>
                                 </div>
                                 <div style="padding: 5px;">
-                                    <a href="/GestionProductos/productos?accion=eliminar&id=${status.index}"><button>Eliminar</button></a>
+                                    <a href="/GestionProductos/productos?accion=eliminar&id=${prod.idProducto}"><button>Eliminar</button></a>
                                 </div>
                             </div>
                         </td>

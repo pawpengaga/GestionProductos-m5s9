@@ -35,15 +35,26 @@ public class ProductoServlet extends HttpServlet {
 
 		try {
 			if ("add".equals(accion)) {
+
 				// Redirige al creador de productos
 				RequestDispatcher dispatcher = request.getRequestDispatcher("addProductos.jsp");
 				dispatcher.forward(request, response);
-			} else if ("edita".equals(accion)) {
+
+			} else if ("editar".equals(accion)) {
+
+				int id = Integer.parseInt(request.getParameter("id"));
+				request.setAttribute("id", id);
 				RequestDispatcher dispatcher = request.getRequestDispatcher("editProductos.jsp");
 				dispatcher.forward(request, response);
-			} else if ("elimina".equals(accion)) {
+
+			} else if ("eliminar".equals(accion)) {
 				// Porsiacaso...
+				int id = Integer.parseInt(request.getParameter("id"));
+				implDAO.eliminarProduct(id);
+				response.sendRedirect("/GestionProductos/productos");
+
 			} else if (accion == null) {
+
 				System.out.println("Se entro por aqui");
 				// Sin ninguna accion, solo vemos los productos
 				// Primero le pasamos los productos como atributo
@@ -74,20 +85,13 @@ public class ProductoServlet extends HttpServlet {
 				// Una vez creado el producto se vuelve a redireccionar al GET del servlet
 				response.sendRedirect("/GestionProductos/productos");
 				
-			} else if (accion.equals("edita")) {
+			} else if (accion.equals("editar")) {
 
 				String nombre = request.getParameter("nombre");
 				double precio = Double.parseDouble(request.getParameter("precio"));
 				implDAO.updateProduct(new Producto(0, nombre, precio));
 
 				// Una vez creado el producto se vuelve a redireccionar al GET del servlet
-				response.sendRedirect("/GestionProductos/productos");
-	
-			} else if (accion.equals("elimina")) {
-
-				// Para eliminar solo necesitamos el id
-				int id = Integer.parseInt(request.getParameter("id"));
-				implDAO.eliminarProduct(id);
 				response.sendRedirect("/GestionProductos/productos");
 	
 			}
